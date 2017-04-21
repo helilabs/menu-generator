@@ -1,0 +1,21 @@
+{
+    "name": "helilabs/menu-generator",
+    "description": "HTML Menu Generator that plays well with bootstrap.",
+    "keywords": ["laravel", "html-menu-generator"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohammed Manssour",
+            "email": "manssour.mohammed@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Helilabs\\HeliMenuGenerator\\": "src/"
+        }
+    },
+    "require": {
+        "illuminate/support": "~5"
+    }
+
+}
