@@ -8,7 +8,8 @@ This was because in every new project i do for some client i start with the same
 HeliMenuGenerator just generates multi level html `ul` list this because every project has it's own styling
 
 ## installation
-in `config/app` file 
+in `config/app` file
+
 1- the `providers` section add the following ling
 ```php
 Helilabs\HeliMenuGenerator\LaravelLogic\HeliMenuGeneratorServiceProvider::class,
