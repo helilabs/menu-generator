@@ -1,4 +1,4 @@
-<li class="{{ $isActive ? 'active' : '' }}">
+<li {!! $options !!}>
 	@if( !$hasChildren )
 	    <a href="{{ url( $url ) }}">
 	        {!! $icon !!}

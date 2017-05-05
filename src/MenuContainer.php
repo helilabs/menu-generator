@@ -2,7 +2,7 @@
 
 namespace Helilabs\HeliMenuGenerator;
 
-Class MenuContainer {
+Class MenuContainer extends HtmlHelper{
 	/**
 	 * This is a menu container that wrap menu items
 	 * @var array
@@ -10,6 +10,14 @@ Class MenuContainer {
 	public $menu;
 
 	public $activeItem;
+
+	/**
+	 * Html Options
+	 * @var array
+	 */
+	public $options = [
+		'class' => 'nav'
+	];
 
 	/**
 	 * is this menu Container a sub menu
@@ -31,20 +39,33 @@ Class MenuContainer {
 		return $this;
 	}
 
+	/**
+	 * is this menu is a submenu of main menu
+	 * @param  boolean  $isSub set if is this menu is a submenu of main menu
+	 * @return this;
+	 */
 	public function isSubMenu( $isSub ){
 		$this->isSub = $isSub;
 		return $this;
 	}
 
-	public function getMenu( ){
+	public function getMenu(){
 		return $this->menu;
 	}
 
+	/**
+	 * is this menu is Empty and has no menuItems
+	 * @return boolean
+	 */
 	public function isEmpty(){
 		return $this->menu->isEmpty();
 	}
 
-	public function generate( $id = null ){
+	/**
+	 * Generate the menu
+	 * @return View
+	 */
+	public function generate( ){
 		if( $this->menu->isEmpty() ){
     		return;
     	}
@@ -54,10 +75,13 @@ Class MenuContainer {
     		$menuItems .= $menuItem->generate( $this->activeItem );
     	}
 
+    	if( $this->isSub ){
+    		$this->pushOption('class', 'collapse');
+    	}
+
     	return view('Helilabs\HeliMenuGenerator::menu-container', [ 
     		'content' => $menuItems,
-    		'id' => $id,
-    		'isSub' => $this->isSub
+    		'options' => $this->generateAttrs(),
     	])->render();
 	}
 

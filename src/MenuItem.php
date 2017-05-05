@@ -2,7 +2,7 @@
 
 namespace Helilabs\HeliMenuGenerator;
 
-Class MenuItem{
+Class MenuItem extends HtmlHelper{
 
 	/**
 	 * Menu Item Key
@@ -34,6 +34,10 @@ Class MenuItem{
 	 * @var MenuContainer
 	 */
 	public $innerMenu;
+
+
+    public $options = [
+    ];
 
 	public function __construct( $key, $text, $url, $icon ){
 		$this->key = $key;
@@ -177,7 +181,11 @@ Class MenuItem{
     		return;
     	}
 
-    	return $this->innerMenu->setActiveMenuItem( $currentActiveItem )->generate( $this->key );
+        if( $this->isActive( $currentActiveItem ) ){
+            $this->innerMenu->pushOption('class','in');
+        }
+
+    	return $this->innerMenu->setActiveMenuItem( $currentActiveItem )->pushOption('id', $this->key)->generate();
     }
 
     public function isActive( $currentActiveItem ){
@@ -191,8 +199,12 @@ Class MenuItem{
 
     public function generate( $currentActiveMenu ){
 
+        if( $this->isActive( $currentActiveMenu ) ){
+            $this->pushOption('class', 'active');
+        }
+
     	return view('Helilabs\HeliMenuGenerator::menu-item',[
-    		'isActive' => $this->isActive( $currentActiveMenu ),
+    		'options' => $this->generateAttrs(),
     		'key' => $this->key,
     		'text' => $this->text,
     		'icon' => $this->icon,

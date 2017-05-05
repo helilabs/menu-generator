@@ -1,3 +1,3 @@
-<ul class="nav {{ $isSub?'collapse':'' }}" id="{{ $id }}">
+<ul {!! $options !!} >
 {!! $content !!}
 </ul>
